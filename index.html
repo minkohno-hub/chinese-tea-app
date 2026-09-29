@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#31563d">
+<title>中国茶｜製法トレーナー</title>
+<style>
+:root{--green:#31563d;--green2:#e8f0e9;--bg:#f6f4ee;--card:#fff;--text:#222820;--muted:#687068;--line:#d9ddd5;--red:#a33d35;--gold:#9a7427}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;line-height:1.55}header{position:sticky;top:0;z-index:20;background:var(--green);color:white;padding:14px 14px 10px;box-shadow:0 2px 8px #0002}header h1{font-size:19px;margin:0}header p{font-size:12px;margin:2px 0 10px;color:#e3eee5}.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}.tabs button{flex:0 0 auto;border:1px solid #ffffff66;border-radius:999px;background:#ffffff12;color:#fff;padding:7px 12px;font-size:13px}.tabs button.active{background:#fff;color:var(--green)}main{max-width:900px;margin:auto;padding:14px}.panel{display:none}.panel.active{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px;margin:10px 0;box-shadow:0 2px 5px #00000008}.badge{display:inline-block;background:var(--green2);color:var(--green);font-size:12px;border-radius:999px;padding:3px 9px;margin-right:6px}.process{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-top:9px}.step{background:#f0f2ed;border:1px solid #d5dbd3;border-radius:8px;padding:6px 8px;font-size:13px}.arrow{color:var(--green);font-weight:700}.muted{color:var(--muted);font-size:12px}.notice{background:#eef3ee;border-radius:10px;padding:10px 12px;font-size:12px;color:#536055;margin-bottom:12px}h2{font-size:20px;margin:5px 0 10px}h3{font-size:16px;margin:20px 0 8px}.controls{display:grid;gap:9px}.controls select,.controls button,.bigbutton{width:100%;min-height:44px;border-radius:10px;font:inherit}.controls select{background:#fff;border:1px solid var(--line);padding:8px}.controls button,.bigbutton{border:0;background:var(--green);color:#fff;padding:9px 12px;font-weight:600}.controls button.secondary{background:#fff;color:var(--text);border:1px solid var(--line)}.quizbox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px}.score{font-size:13px;color:var(--muted);margin:8px 0}.order-list{list-style:none;padding:0;margin:12px 0}.order-item{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px;margin:7px 0}.num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--green2);color:var(--green);font-weight:700;font-size:12px;flex:none}.label{flex:1;font-size:14px}.move{display:flex;gap:5px}.move button{width:38px;height:38px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:18px}.feedback{display:none;border-radius:10px;padding:10px;margin-top:10px;font-size:13px}.feedback.show{display:block}.correct{background:#e8f4e9;color:#24552d}.wrong{background:#f9e9e7;color:#82332d}.answer{display:none;background:#faf8f0;border:1px solid #e5dcc2;border-radius:10px;padding:10px;margin-top:10px;font-size:13px}.answer.show{display:block}.flash-term{font-size:25px;font-weight:700;text-align:center;padding:30px 10px 20px}.flash-answer{display:none;text-align:center;background:var(--green2);border-radius:12px;padding:14px;margin:8px 0}.flash-answer.show{display:block}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}.stats .card{margin:0}.steps-small{font-size:12px;color:var(--muted);margin-top:5px}footer{padding:20px 14px 40px;max-width:900px;margin:auto;color:var(--muted);font-size:11px}.status{font-size:12px;margin:8px 0;color:var(--green)}
+</style>
+</head>
+<body>
+<header>
+<h1>中国茶インストラクター｜製法トレーナー</h1>
+<p>茶類別の製造工程を「見る・並べる・答える」で覚える</p>
+<div class="tabs">
+<button id="tab-learn" class="active" onclick="showPanel('learn')">学習</button>
+<button id="tab-quiz" onclick="showPanel('quiz')">並び替え</button>
+<button id="tab-flash" onclick="showPanel('flash')">暗記カード</button>
+<button id="tab-list" onclick="showPanel('list')">一覧</button>
+</div>
+</header>
+<main>
+<section id="learn" class="panel active"><h2>製法を学ぶ</h2><div class="notice">工程をタップすると、下の説明で意味を確認できます。まずは茶類ごとの流れを眺めて覚えるのがおすすめです。</div><div id="learnList"></div></section>
+<section id="quiz" class="panel"><h2>工程順 並び替え</h2><div class="quizbox"><div class="controls"><select id="quizSelect"><option value="all">ランダム（全製法）</option><option value="chao">緑茶｜炒青緑茶（一般）</option><option value="bian">緑茶｜扁炒青</option><option value="yuan">緑茶｜円炒青（珠茶）</option><option value="naga">緑茶｜長炒青</option><option value="hong">緑茶｜烘青緑茶</option><option value="shai">緑茶｜晒青緑茶</option><option value="zhen">緑茶｜蒸青緑茶</option><option value="white">白茶</option><option value="yellow">黄茶</option><option value="oolong">青茶｜烏龍茶（一般）</option><option value="olong2">青茶｜烏龍茶・岩茶系の乾燥工程</option><option value="gongfu">紅茶｜工夫紅茶</option><option value="hongbroken">紅茶｜紅砕茶</option><option value="dark">黒茶｜散茶タイプ</option><option value="darkpressed">黒茶｜緊圧茶系</option><option value="jasmine">花茶｜茉莉花茶</option></select><button onclick="newQuiz()">新しい問題</button><button class="secondary" onclick="resetQuiz()">もう一度シャッフル</button></div><div class="status" id="quizStatus">準備中…</div><div class="score">今回の正解数：<span id="score">0 / 0</span></div><div id="quizTitle" class="card">「新しい問題」を押してください。</div><ol id="orderList" class="order-list"></ol><button class="bigbutton" onclick="checkAnswer()">答え合わせ</button><div id="feedback" class="feedback"></div><div id="answer" class="answer"></div></div></section>
+<section id="flash" class="panel"><h2>暗記カード</h2><div class="quizbox"><select id="flashSelect" onchange="showFlash()" style="width:100%;min-height:44px;border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff"></select><div id="flashTerm" class="flash-term">工程</div><div id="flashAnswer" class="flash-answer"></div><div class="controls"><button onclick="showFlashAnswer()">答えを見る</button><button class="secondary" onclick="nextFlash()">次のカード</button></div></div></section>
+<section id="list" class="panel"><h2>全製法一覧</h2><div id="statsGrid" class="stats"></div></section>
+</main>
+<footer>※p.69〜78の写真をもとに整理した学習用データです。書籍の版・表記と照合して最終確認してください。</footer>
+<script>
+'use strict';
+var DATA=[
+{id:'chao',group:'緑茶',name:'炒青緑茶（一般）',process:['殺青','揉捻','解塊篩分','瓶式理条','円篩','烘干','八角炒干'],notes:{'殺青':'加熱によって酸化酵素の働きを止める工程。','揉捻':'茶葉を揉み、形を整え成分を出しやすくする工程。','解塊篩分':'揉捻後の固まりをほぐし、篩で分ける工程。','瓶式理条':'茶葉の形を整える工程。','円篩':'茶葉を篩分けする工程。','烘干':'加熱して乾燥する工程。','八角炒干':'炒って仕上げる乾燥工程。'}},
+{id:'bian',group:'緑茶',name:'扁炒青',process:['脱水','鮮葉分級','殺青','理条','圧扁乾燥','煇炒磨光'],notes:{'脱水':'生葉の水分を落とす工程。','鮮葉分級':'鮮葉を状態などで分ける工程。','殺青':'加熱して酸化酵素の働きを止める工程。','理条':'茶葉を整形する工程。','圧扁乾燥':'圧して扁平にしながら乾燥する工程。','煇炒磨光':'炒って表面を磨くように仕上げる工程。'}},
+{id:'yuan',group:'緑茶',name:'円炒青（珠茶）',process:['殺青','揉捻','解塊篩分','二青（円揉）','珠茶炒干'],notes:{'二青（円揉）':'丸い粒状に成形する工程。','珠茶炒干':'粒状の茶を炒って乾燥する仕上げ工程。'}},
+{id:'naga',group:'緑茶',name:'長炒青',process:['殺青','揉捻','解塊篩分','烘干'],notes:{'烘干':'乾燥機などで乾燥する工程。'}},
+{id:'hong',group:'緑茶',name:'烘青緑茶',process:['殺青','揉捻','解塊篩分','烘干（毛火）','烘干（足火）'],notes:{'烘干（毛火）':'最初の乾燥。','烘干（足火）':'仕上げの乾燥。'}},
+{id:'shai',group:'緑茶',name:'晒青緑茶',process:['殺青','揉捻','解塊篩分','晒干'],notes:{'晒干':'日光で乾燥する工程。'}},
+{id:'zhen',group:'緑茶',name:'蒸青緑茶',process:['撰青','殺青','冷却','葉打','粗揉','平揉','中揉','精揉','烘干','篩撰','均堆'],notes:{'撰青':'原料を選別する工程。','葉打':'葉を打って処理する工程。','粗揉':'粗く揉む工程。','平揉':'平らに揉む工程。','中揉':'中程度に揉む工程。','精揉':'形を整えながら仕上げる揉捻工程。','均堆':'仕上がりを均一にする工程。'}},
+{id:'white',group:'白茶',name:'白茶',process:['萎凋','乾燥'],notes:{'萎凋':'茶葉を広げ、水分を失わせながらしおれさせる工程。','乾燥':'乾燥して仕上げる工程。'}},
+{id:'yellow',group:'黄茶',name:'黄茶',process:['萎凋','殺青','揉捻','初乾','攤涼','再烘','悶黄','乾燥'],notes:{'萎凋':'茶葉の水分を減らす工程。','殺青':'加熱して酸化酵素の働きを止める工程。','揉捻':'茶葉を揉む工程。','初乾':'初期の乾燥。','攤涼':'茶葉を広げて冷ます工程。','再烘':'再び加熱・乾燥する工程。','悶黄':'黄茶特有の工程で、黄変を進める工程。','乾燥':'最終的に乾燥して仕上げる工程。'}},
+{id:'oolong',group:'青茶',name:'烏龍茶（一般）',process:['萎凋','作青（揺青・発酵）','炒青（殺青）','揉捻（発酵）','乾燥'],notes:{'萎凋':'水分を減らし、次工程の準備をする工程。','作青（揺青・発酵）':'揺青と静置を行い、香り・酸化を進める工程。','炒青（殺青）':'加熱して酸化酵素の活性を抑える工程。','揉捻（発酵）':'揉んで形を整えながら発酵を進める工程。','乾燥':'水分を落として仕上げる工程。'}},
+{id:'olong2',group:'青茶',name:'烏龍茶・岩茶系の乾燥工程',process:['炒青','揉捻','包揉','乾燥'],notes:{'炒青':'高温で炒って酸化酵素の活性を抑える工程。','揉捻':'茶葉を揉んで形を整える工程。','包揉':'包んで揉み、形を整える工程。','乾燥':'加熱して水分を落とす工程。'}},
+{id:'gongfu',group:'紅茶',name:'工夫紅茶',process:['萎凋','揉捻','解塊','篩分','揉捻','発酵','毛火','足火','選別','補火'],notes:{'発酵':'紅茶の品質形成に重要な酸化工程。','毛火':'一次乾燥。','足火':'二次乾燥。','補火':'選別後に軽く火入れして仕上げる工程。'}},
+{id:'hongbroken',group:'紅茶',name:'紅砕茶',process:['萎凋','転子揉切→発酵','解塊篩分','烘干'],notes:{'転子揉切→発酵':'揉切と発酵を行う工程。','烘干':'乾燥して仕上げる工程。'}},
+{id:'dark',group:'黒茶',name:'黒茶（散茶タイプ・一般）',process:['萎凋','炒青（殺青）','初揉','渥堆（堆積）','復揉','乾燥'],notes:{'渥堆（堆積）':'堆積して発酵を進める黒茶特有の工程。','初揉':'最初の揉捻。','復揉':'堆積後に再び揉む工程。'}},
+{id:'darkpressed',group:'黒茶',name:'黒茶（緊圧茶系）',process:['蒸気加熱・加湿','揉捻','成型','自然乾燥・自然発酵','熟成'],notes:{'蒸気加熱・加湿':'蒸気などで加熱・加湿する工程。','揉捻':'茶葉を揉む工程。','成型':'固形状に成形する工程。','自然乾燥・自然発酵':'乾燥と発酵を進める工程。','熟成':'時間をかけて品質を変化させる工程。'}},
+{id:'jasmine',group:'花茶',name:'花茶（茉莉花茶）の製造工程',process:['毛茶乾燥','茶花伴和（食花・堆窨）','通花散熱','収堆','出花','復燻','復窨','堆花'],notes:{'毛茶乾燥':'花を受け入れる前に茶葉を乾燥する工程。','茶花伴和（食花・堆窨）':'茶葉と花を合わせ、香りを移す工程。','通花散熱':'発熱した茶葉を広げ、熱を逃がす工程。','収堆':'再び堆積させる工程。','出花':'花を取り出す工程。','復燻':'再び香りを付ける工程。','復窨':'再び窨制を行う工程。','堆花':'仕上げに花を加える工程。'}}
+];
+var current=null,order=[],score=0,total=0;
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
+function showPanel(id){document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('active');});document.getElementById(id).classList.add('active');document.querySelectorAll('.tabs button').forEach(function(x){x.classList.remove('active');});document.getElementById('tab-'+id).classList.add('active');window.scrollTo(0,0);}
+function renderProcess(p,notes){return '<div class="process">'+p.map(function(x,i){return '<span class="step">'+esc(x)+'</span>'+(i<p.length-1?'<span class="arrow">→</span>':'');}).join('')+'</div>';}
+function buildLearn(){var groups={};DATA.forEach(function(d){if(!groups[d.group])groups[d.group]=[];groups[d.group].push(d);});var html='';Object.keys(groups).forEach(function(g){html+='<h3>'+esc(g)+'</h3>';groups[g].forEach(function(d){html+='<div class="card"><span class="badge">'+esc(d.group)+'</span><b>'+esc(d.name)+'</b>'+renderProcess(d.process,d.notes);html+='<details style="margin-top:9px"><summary>各工程の意味を見る</summary>';d.process.forEach(function(x){html+='<div style="margin-top:7px;padding:8px;background:#f7f8f5;border-radius:9px"><b>'+esc(x)+'</b><br><span class="muted">'+esc(d.notes[x]||'この工程の詳しい説明はありません。')+'</span></div>';});html+='</details></div>';});});document.getElementById('learnList').innerHTML=html;}
+function findData(id){for(var i=0;i<DATA.length;i++)if(DATA[i].id===id)return DATA[i];return null;}
+function newQuiz(){var id=document.getElementById('quizSelect').value;var pool=id==='all'?DATA:[findData(id)];current=pool[Math.floor(Math.random()*pool.length)];order=shuffle(current.process);document.getElementById('quizTitle').innerHTML='<b>'+esc(current.group)+'｜'+esc(current.name)+'</b><br><span class="muted">正しい工程順に並べてください。</span>';clearFeedback();renderOrder();document.getElementById('quizStatus').textContent='問題を作成しました。';}
+function resetQuiz(){if(!current){newQuiz();return;}order=shuffle(current.process);clearFeedback();renderOrder();}
+function renderOrder(){var el=document.getElementById('orderList');el.innerHTML='';order.forEach(function(x,i){var li=document.createElement('li');li.className='order-item';li.innerHTML='<span class="num">'+(i+1)+'</span><span class="label">'+esc(x)+'</span><span class="move"><button type="button" onclick="moveItem('+i+',-1)">↑</button><button type="button" onclick="moveItem('+i+',1)">↓</button></span>';el.appendChild(li);});}
+function moveItem(i,dir){var j=i+dir;if(j<0||j>=order.length)return;var t=order[i];order[i]=order[j];order[j]=t;renderOrder();}
+function clearFeedback(){document.getElementById('feedback').className='feedback';document.getElementById('feedback').textContent='';document.getElementById('answer').className='answer';document.getElementById('answer').textContent='';}
+function checkAnswer(){if(!current){newQuiz();return;}total++;var ok=order.length===current.process.length&&order.every(function(x,i){return x===current.process[i];});if(ok){score++;document.getElementById('feedback').className='feedback show correct';document.getElementById('feedback').textContent='正解！ 工程順を正しく並べられています。';}else{document.getElementById('feedback').className='feedback show wrong';document.getElementById('feedback').textContent='不正解。正しい工程順を確認してください。';}document.getElementById('score').textContent=score+' / '+total;var a=document.getElementById('answer');a.className='answer show';a.innerHTML='<b>正しい工程：</b><br>'+current.process.map(function(x,i){return (i+1)+'. '+esc(x);}).join('　');}
+function buildFlash(){var s=document.getElementById('flashSelect');var html='';DATA.forEach(function(d){d.process.forEach(function(x,i){html+='<option value="'+esc(d.id+'|'+i)+'">'+esc(d.group+'｜'+d.name+'｜'+x)+'</option>';});});s.innerHTML=html;}
+function showFlash(){var v=document.getElementById('flashSelect').value.split('|');var d=findData(v[0]);var x=d.process[Number(v[1])];document.getElementById('flashTerm').textContent=x;document.getElementById('flashAnswer').className='flash-answer';document.getElementById('flashAnswer').innerHTML='<b>'+esc(d.name)+'</b><br>'+esc(d.notes[x]||'この工程の詳しい説明はありません。');}
+function showFlashAnswer(){document.getElementById('flashAnswer').className='flash-answer show';}
+function nextFlash(){var s=document.getElementById('flashSelect');s.selectedIndex=Math.floor(Math.random()*s.options.length);showFlash();}
+function buildList(){document.getElementById('statsGrid').innerHTML=DATA.map(function(d){return '<div class="card"><span class="badge">'+esc(d.group)+'</span><b>'+esc(d.name)+'</b><div style="font-size:24px;font-weight:700;color:var(--green);margin-top:6px">'+d.process.length+'工程</div>'+renderProcess(d.process,d.notes)+'</div>';}).join('');}
+function init(){buildLearn();buildFlash();buildList();newQuiz();showFlash();document.getElementById('quizStatus').textContent='✓ 起動しました。ボタンを押して操作できます。';}
+window.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
